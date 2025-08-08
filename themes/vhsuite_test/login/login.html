@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/base.css" type="text/css">
+    <title>Login</title>
+    <style>
+        .login-main-section {
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .login-form-container {
+            background-color: var(--color-primary);
+            position: relative;
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        svg {
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .half-circle {
+            width: 200px;
+            height: 100px;
+            position: absolute;
+            right: 70%;
+            top: 50%;
+            transform: translateX(-50%);
+            transform: rotate(270deg);
+            border-bottom: 1px solid orange;
+            border-left: 1px solid orange;
+            border-right: 1px solid orange;
+            border-bottom-left-radius: 100px;
+            border-bottom-right-radius: 100px;
+            background: #fff;
+        }
+
+        .login-form-sub-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 90%;
+        }
+
+        .login-form-input-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .login-form-input-button-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        .privacy-policy-link {
+            transition: all;
+        }
+
+        .privacy-policy-link:hover {
+            opacity: 0.7;
+        }
+
+        .copyright-container {
+            margin-left: auto;
+            margin-right: auto;
+            top: 8rem;
+        }
+
+        .carousal-main-container {
+            position: relative;
+            width: 65%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1rem;
+            padding: 5rem 5rem;
+        }
+
+        .carousal-text-container {
+            position: absolute;
+        }
+
+        .carousal-heading {
+            font-weight: normal;
+            width: 47%;
+            margin-left: 5rem;
+        }
+
+        .carousal-heading-special-text {
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        .carousal-image {
+            height: 20rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media screen and (min-width: 1024px) {
+            .login-form-container {
+                background-image: url("../assets/images/login-background.svg");
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-color: transparent;
+            }
+
+            .login-form-sub-container {
+                gap: 2rem;
+                width: 85%;
+            }
+
+            .login-form-input-container {
+                gap: 2rem;
+            }
+
+            .login-form-input-button-container {
+                margin-top: 2rem;
+            }
+
+            .carousal-image {
+                height: 40rem;
+            }
+        }
+
+        @media screen and (min-width: 1440px) {
+            .copyright-container {
+                top: 13rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section class="login-main-section">
+        <section class="carousal-main-container">
+            <div class="carousal-text-container">
+                <h1 class="carousal-heading login-portal-description gray-text">
+                    Simplify your workflow with the world’s most intuitive and secure
+                    <span class="carousal-heading-special-text font-variety-black primary-text">EDC</span>
+                    solution
+                </h1>
+                <img src="../assets/images/login-info.svg" alt="intro image" class="carousal-image" />
+            </div>
+        </section>
+        <section class="login-form-container">
+            <div class="login-form-sub-container">
+                <div>
+                    <h2 class="font-variety-black dashboard-heading white-text">Hello!</h2>
+                    <span class="white-text login-sub-message">Welcome to EDC solution</span>
+                </div>
+                <form id="kc-form-login" onsubmit="return validateLogin()" method="post" action="${url.loginAction}">
+                    <div class="login-form-input-container">
+                        <div><label for="username"
+                                class="input-label text-label input-label-font white-text">Username</label>
+                            <input id="username" name="username" type="text" autofocus autocomplete="off"
+                                placeholder="Enter username" class="input-value form-input input-form" />
+                            <span id="usernameError" class="input-error-text">Please enter a valid username</span>
+                        </div>
+                        <div><label for="password"
+                                class="input-label text-label input-label-font white-text">Password</label>
+                            <input id="password" name="password" type="password" placeholder="Enter password"
+                                class="input-value form-input input-form" />
+                            <span id="passwordError" class="input-error-text">Please enter a valid password</span>
+                        </div>
+                    </div>
+                    <div class="login-form-input-button-container">
+                        <button type="submit" class="action-btn-container submit-container action-btn-rounded">
+                            <span class="action-btn-label action-button-text">Login</span>
+                        </button>
+                        <a href="" class="white-text">Forgot password?</a>
+                    </div>
+                </form>
+                <span class="copyright-container policy-link white-text">Copyrights © ${.now?string("yyyy")}. VH Suite |
+                    <a class="privacy-policy-link white-text">Privacy Policy</a>
+                </span>
+            </div>
+        </section>
+    </section>
+</body>
+
+<script type="text/javascript">
+    function validateLogin() {
+        const username = document.querySelector("#username").value || "";
+        const password = document.querySelector("#password").value || "";
+        let result = true;
+        if (!username) {
+            document.querySelector("usernameError").style.display = "inline-block";
+            // return false;
+            result = false;
+        } else {
+            document.querySelector("usernameError").style.display = "none";
+        }
+        if (!username) {
+            document.querySelector("passwordError").style.display = "inline-block";
+            // return false;
+            result = false;
+        } else {
+            document.querySelector("passwordError").style.display = "none";
+        }
+        alert(result)
+        return true;
+    }
+</script>
+
+</html>

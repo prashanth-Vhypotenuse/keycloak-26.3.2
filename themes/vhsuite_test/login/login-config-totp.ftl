@@ -1,0 +1,1 @@
+Dummy content for login/login-config-totp.ftl
