@@ -18,9 +18,9 @@
                 <span class="highlighted-text">
                     <#if client?? && client.clientId=="vhsuite-etmf-portal">
                         ETMF
-                        <#elseif client.clientId=="vhsuite-rtsm-portal">
+                        <#elseif client?? client.clientId=="vhsuite-rtsm-portal">
                             RTSM
-                            <#elseif client.clientId=="vhsuite-support-portal">
+                            <#elseif client?? client.clientId=="vhsuite-support-portal">
                                 Support
                                 <#else>
                                     EDC
@@ -95,17 +95,13 @@
             <#if skipLink??>
                 <#else>
                     <#if pageRedirectUri?has_content>
-                        <a href="${pageRedirectUri}" class="btn-link">
-                            ${kcSanitize(msg("backToApplication"))?no_esc}
-                        </a>
+                        <meta http-equiv="refresh" content="0;url=${pageRedirectUri}">
                         <#elseif actionUri?has_content>
-                            <a href="${actionUri}" class="btn-link">
-                                ${kcSanitize(msg("proceedWithAction"))?no_esc}
-                            </a>
+                            <meta http-equiv="refresh" content="0;url=${actionUri}">
                             <#elseif (client.baseUrl)?has_content>
-                                <a href="${client.baseUrl}" class="btn-link">
-                                    ${kcSanitize(msg("backToApplication"))?no_esc}
-                                </a>
+                                <meta http-equiv="refresh" content="0;url=${client.baseUrl}">
+                                <#elseif message.summary==accountUpdatedMessage || message.summary==accountPasswordUpdatedMessage>
+                                    <meta http-equiv="refresh" content="0;url=${url.realmAccountUrl}">
                     </#if>
             </#if>
         </div>
