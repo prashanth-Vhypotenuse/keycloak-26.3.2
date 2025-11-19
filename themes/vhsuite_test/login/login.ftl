@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="${url.resourcesPath}/assets/images/favicon.ico" />
   <title>VHSuite - Login</title>
   <link rel="stylesheet" href="${url.resourcesPath}/css/main.css" />
 </head>
@@ -16,9 +17,9 @@
         <span class="highlighted-text">
           <#if client?? && client.clientId=="vhsuite-etmf-portal">
             ETMF
-            <#elseif client.clientId=="vhsuite-rtsm-portal">
+            <#elseif client?? && client.clientId=="vhsuite-rtsm-portal">
               RTSM
-              <#elseif client.clientId=="vhsuite-support-portal">
+              <#elseif client?? && client.clientId=="vhsuite-support-portal">
                 Support
                 <#else>
                   EDC
@@ -36,9 +37,9 @@
               Welcome to
               <#if client?? && client.clientId=="vhsuite-etmf-portal">
                 ETMF
-                <#elseif client.clientId=="vhsuite-rtsm-portal">
+                <#elseif client?? && client.clientId=="vhsuite-rtsm-portal">
                   RTSM
-                  <#elseif client.clientId=="vhsuite-support-portal">
+                  <#elseif client?? && client.clientId=="vhsuite-support-portal">
                     Support
                     <#else>
                       EDC
@@ -74,19 +75,35 @@
                 </div>
                 <span id="passwordError" class="error-text"></span>
               </div>
-              <div class="form-actions">
-                <button type="submit" class="submit-action-btn">Login</button>
-                <a href="${url.loginResetCredentialsUrl}" class="login-sub-message white-text">Forgot password?</a>
-              </div>
-          </form>
+              <#-- <div class="${properties.kcFormGroupClass!} ${properties.kcFormSettingClass!}">
+                <div id="kc-form-options">
+                  <div class="checkbox">
+                    <label class="input-label" style="display: flex; gap: 6px">
+                      <#if login.rememberMe??>
+                        <input tabindex="5" id="rememberMe" name="rememberMe" type="checkbox" checked>
+                        <#else>
+                          <input tabindex="5" id="rememberMe" name="rememberMe" type="checkbox">
+                      </#if>
+                      <span>
+                        ${msg("rememberMe")}
+                      </span>
+                    </label>
+                  </div>
+                </div>
+        </div> -->
+        <div class="form-actions">
+          <button type="submit" class="submit-action-btn">Login</button>
+          <a href="${url.loginResetCredentialsUrl}" class="login-sub-message white-text">Forgot password?</a>
         </div>
-      </div>
-      <div class="footer policy-link">
-        Copyrights © ${.now?string("yyyy")}. VH Suite | <a href="#" style="color: white;">Privacy Policy</a>
+        </form>
       </div>
     </div>
-    <div id="loader" class="loader">
-      <div class="spinner" style="
+    <div class="footer policy-link">
+      Copyrights © ${.now?string("yyyy")}. VH Suite | <a href="#" style="color: white;">Privacy Policy</a>
+    </div>
+  </div>
+  <div id="loader" class="loader">
+    <div class="spinner" style="
           border: 6px solid #f3f3f3;
           border-top: 6px solid #002244;
           border-radius: 50%;
@@ -94,7 +111,7 @@
           height: 50px;
           animation: spin 1s linear infinite;
       " />
-    </div>
+  </div>
   </div>
   <script>
   let isSubmitPressed = false

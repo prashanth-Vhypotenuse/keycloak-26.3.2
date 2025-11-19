@@ -101,6 +101,15 @@ input[disabled] {
     background-color: transparent;
 }
 
+input[type="checkbox"] {
+    height: 16px;
+    width: 16px;
+    vertical-align: baseline;
+    margin-top: 0;
+    color: var(--color-primary);
+    accent-color: var(--color-primary) !important;
+}
+
 .submit-action-btn {
     background-color: var(--color-accent);
     color: var(--color-white);

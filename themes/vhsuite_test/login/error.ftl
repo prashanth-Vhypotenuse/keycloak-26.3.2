@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="${url.resourcesPath}/assets/images/favicon.ico" />
     <title>VHSuite - Error Page</title>
     <link rel="stylesheet" href="${url.resourcesPath}/css/main.css" />
 </head>

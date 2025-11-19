@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="${url.resourcesPath}/assets/images/favicon.ico" />
   <title>VHSuite - Forgot password</title>
   <link rel="stylesheet" href="${url.resourcesPath}/css/main.css" />
 </head>
@@ -16,9 +17,9 @@
         <span class="highlighted-text">
           <#if client?? && client.clientId=="vhsuite-etmf-portal">
             ETMF
-            <#elseif client.clientId=="vhsuite-rtsm-portal">
+            <#elseif client?? && client.clientId=="vhsuite-rtsm-portal">
               RTSM
-              <#elseif client.clientId=="vhsuite-support-portal">
+              <#elseif client?? && client.clientId=="vhsuite-support-portal">
                 Support
                 <#else>
                   EDC
